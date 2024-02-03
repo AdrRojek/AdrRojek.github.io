@@ -1,0 +1,106 @@
+<!DOCTYPE html
+ <html lang="pl">
+<head>
+ <title>Wybór Usługi</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="service.css">
+
+</head>
+<body >
+    <div id="navbar">
+
+        <a href="index.html"><img src="icons/rollback.png" alt="" id="navimg"></a>
+        
+
+    </div>
+    <div id="serviceSelection" >
+        <h2>Wybierz usługę, aby dowiedzieć się więcej</h2>
+        <select id="serviceDropdown">
+            
+        </select>
+    </div>
+    <div id="serviceDetails">
+    </div>
+    <img id="serviceImages"  style="max-width: 100%; height: auto;">
+
+   
+    <script>
+    window.addEventListener('load', function() {
+
+        const dropdown = document.getElementById("serviceDropdown");
+        dropdown.value = "Naprawa silników";
+    
+        const event = new Event('change');
+        dropdown.dispatchEvent(event);
+    });
+    
+    const services = [
+        "Naprawa silników",
+        "Wymiana oleju",
+        "Wymiana kół + wyważenie",
+        "Diagnostyka komputerowa",
+        "Naprawa układu hamulcowego"
+    ];
+    
+    const dropdown = document.getElementById("serviceDropdown");
+    services.forEach(function(service) {
+        const option = document.createElement("option");
+        option.value = service;
+        option.text = service;
+        dropdown.appendChild(option);
+    });
+    
+    const serviceImages = {
+        "Naprawa silników": "services/silnik.png",
+        "Wymiana oleju": "services/olej.png",
+        "Wymiana kół + wyważenie": "services/kola.png",
+        "Diagnostyka komputerowa": "services/diagnostyka.png",
+        "Naprawa układu hamulcowego": "services/hamulce.png"
+    };
+    
+    const serviceDescriptions = {
+        'Naprawa silników': ' \n Naprawa silnika jest kompleksowym procesem, który może obejmować różne etapy, w zależności od diagnozy i rodzaju usterki. Proces ten zazwyczaj rozpoczyna się od szczegółowej diagnostyki, aby zidentyfikować konkretny problem. Oto główne etapy naprawy silnika:\n1.  Diagnostyka:  Używając specjalistycznych narzędzi diagnostycznych, mechanicy sprawdzają parametry pracy silnika, aby znaleźć przyczynę usterki. Może to obejmować czytanie kodów błędów z komputera pokładowego pojazdu.\n 2.  Demontaż:  W celu dokładnego dostępu do uszkodzonych części, silnik może zostać częściowo lub całkowicie zdemontowany. To pozwala na dokładne zbadanie stanu poszczególnych komponentów.\n 3.  Ocena Stanu Komponentów:  Kluczowe części silnika, takie jak tłoki, pierścienie, wał korbowy, głowica, zawory i uszczelki są sprawdzane pod kątem zużycia i uszkodzeń.\n 4.  Wymiana lub Naprawa Części:  Uszkodzone lub zużyte części są wymieniane lub naprawiane. Może to obejmować szlifowanie wału korbowego, wymianę pierścieni tłokowych, naprawę głowicy lub wymianę uszczelki głowicy.\n 5.  Składanie i Testowanie:  Po wymianie lub naprawie części, silnik jest składany z powrotem. Następnie przeprowadza się testy, aby upewnić się, że silnik działa poprawnie i efektywnie.\n 6.  Regulacja i Kalibracja:  Ostatnim etapem jest dokładna regulacja i kalibracja silnika, w tym ustawienia zapłonu i paliwa, aby zapewnić jego optymalną pracę.\n Naprawa silnika wymaga specjalistycznej wiedzy i doświadczenia, a także dostępu do odpowiednich narzędzi i części zamiennych. Jest to kluczowe dla zapewnienia, że silnik będzie działał bezawaryjnie i efektywnie po naprawie.', 
+        'Wymiana oleju': '\n Wymiana oleju jest podstawowym, ale kluczowym elementem konserwacji pojazdu, który zapewnia prawidłowe smarowanie silnika i jego długotrwałe funkcjonowanie. Proces ten zazwyczaj obejmuje następujące kroki:\n Przygotowanie: Najpierw pojazd umieszcza się na podnośniku lub nad kanałem, aby zapewnić łatwy dostęp do miski olejowej. Mechanik sprawdza również rodzaj i ilość wymaganego oleju dla konkretnego modelu pojazdu.\n Odprowadzenie Starego Oleju: Po odkręceniu korka spustowego z miski olejowej, stary olej jest odprowadzany do pojemnika. Ważne jest, aby olej był całkowicie odprowadzony, co często wymaga pozostawienia pojazdu na jakiś czas, aby olej mógł w pełni wypłynąć.\nWymiana Filtra Oleju: Stary filtr oleju jest usuwany i zastępowany nowym. Filtr oleju jest kluczowy dla oczyszczania oleju z zanieczyszczeń i należy go wymieniać za każdym razem przy wymianie oleju.\nNapełnianie Nowym Olejem: Po zamknięciu korka spustowego miska olejowa jest napełniana nowym olejem o odpowiedniej specyfikacji. Mechanik musi upewnić się, że olej jest wlewany w odpowiedniej ilości.\nKontrola i Testowanie: Po wymianie oleju i filtra, mechanik sprawdza poziom oleju za pomocą bagnetu, aby upewnić się, że nie ma wycieków i że olej jest na odpowiednim poziomie. Następnie silnik jest uruchamiany, aby umożliwić cyrkulację nowego oleju i sprawdzenie, czy nie występują wycieki.\nDokumentacja i Zalecenia: Na koniec mechanik dokumentuje wymianę oleju i zaleca termin kolejnej wymiany, opierając się na przebiegu pojazdu i zaleceniach producenta.\nWymiana oleju jest prostym, ale istotnym procesem, który pomaga w utrzymaniu silnika w dobrym stanie i zapobiega poważniejszym problemom mechanicznym', 
+        'Wymiana kół + wyważenie': '\nWymiana kół wraz z wyważeniem jest kluczowym elementem konserwacji pojazdu, który zapewnia bezpieczeństwo i komfort jazdy. Proces ten obejmuje kilka etapów:\nPodniesienie Pojazdu: Przy użyciu podnośnika lub innego urządzenia, pojazd jest podnoszony, aby umożliwić bezpieczny dostęp do kół.\nDemontaż Starych Kół: Używając klucza do kół lub maszyny do odkręcania śrub, stare koła są demontowane z pojazdu.\nSprawdzenie Stanu Opon i Felg: Przed montażem nowych kół, mechanik sprawdza stan opon i felg pod kątem ewentualnych uszkodzeń czy zużycia. W razie potrzeby, opony mogą być naprawiane lub wymieniane.\nMontaż Nowych Kół: Nowe koła są montowane na pojazdzie. Mechanik dokręca śruby z odpowiednim momentem obrotowym, aby zapewnić bezpieczeństwo.\nWyważenie Kół: Po zamontowaniu, koła są wyważane na specjalistycznej maszynie do wyważania. Wyważenie jest kluczowe dla zapewnienia równomiernego rozłożenia masy koła i opony, co przekłada się na lepszą stabilność pojazdu, komfort jazdy i równomierne zużycie opon.\nKontrola i Test Jazdy: Po zakończeniu prac, mechanik przeprowadza kontrolę końcową, aby upewnić się, że wszystkie koła są prawidłowo zamontowane i wyważone. Może być również przeprowadzony test jazdy, aby sprawdzić, czy pojazd zachowuje się poprawnie na drodze.\nZalecenia dla Klienta: Na koniec mechanik może udzielić klientowi zaleceń dotyczących eksploatacji i konserwacji kół, w tym odpowiedniej ciśnienia w oponach i regularnego sprawdzania stanu opon.\nWymiana kół wraz z wyważeniem jest ważną procedurą, która nie tylko zapewnia lepszą przyczepność i bezpieczeństwo jazdy, ale także pomaga w przedłużeniu żywotności opon i układu zawieszenia pojazdu. Regularne przeprowadzanie tych czynności jest zalecane, aby utrzymać pojazd w optymalnym stanie', 
+        'Diagnostyka komputerowa': '\nDiagnostyka komputerowa pojazdów to nowoczesna metoda oceny stanu technicznego samochodu za pomocą specjalistycznego sprzętu diagnostycznego podłączanego do systemu pokładowego pojazdu. Ten proces pozwala na szybkie i dokładne zidentyfikowanie potencjalnych problemów oraz monitorowanie wydajności różnych systemów pojazdu. Oto kluczowe elementy diagnostyki komputerowej:\nPodłączenie Sprzętu Diagnostycznego: Proces rozpoczyna się od podłączenia urządzenia diagnostycznego do portu OBD-II (On-Board Diagnostics) pojazdu, który jest standardowym interfejsem komunikacyjnym w większości nowoczesnych samochodów.\nOdczyt Kodów Błędów: Urządzenie diagnostyczne skanuje system komputerowy pojazdu w poszukiwaniu zapisanych kodów błędów. Każdy kod błędu odnosi się do konkretnego problemu lub awarii w określonym systemie pojazdu, takim jak układ napędowy, układ hamulcowy, system wtrysku paliwa, itp.\nAnaliza i Interpretacja Danych: Po odczytaniu kodów błędów, mechanik analizuje je, korzystając z doświadczenia oraz specjalistycznych baz danych, aby zrozumieć przyczynę i naturę problemu. Może to obejmować również monitorowanie w czasie rzeczywistym parametrów pracy pojazdu, takich jak ciśnienie paliwa, temperatura silnika, czy wydajność czujników.\nWskazanie Potencjalnych Rozwiązań: Na podstawie zebranych danych, mechanik może zidentyfikować źródło problemu i zaproponować odpowiednie działania naprawcze. W niektórych przypadkach możliwe jest również skasowanie kodów błędów i zresetowanie systemu, aby sprawdzić, czy problem się powtórzy.\nRaport Diagnostyczny: Klient otrzymuje szczegółowy raport z przeprowadzonej diagnostyki, w którym wymienione są wszystkie zidentyfikowane problemy oraz zalecane środki naprawcze.\nDiagnostyka komputerowa jest niezwykle ważnym narzędziem w nowoczesnym warsztacie samochodowym, pozwalającym na efektywne i celowane działania naprawcze. Dzięki niej możliwe jest szybkie zdiagnozowanie wielu problemów, które mogłyby pozostać niewykryte przy użyciu tradycyjnych metod diagnostycznych. Regularne przeprowadzanie diagnostyki komputerowej pomaga w utrzymaniu pojazdu w optymalnym stanie technicznym, zapobiegając poważnym awariom i przedłużając żywotność pojazdu', 
+        'Naprawa układu hamulcowego': '\nNaprawa układu hamulcowego jest jedną z najważniejszych procedur serwisowych, mających na celu zapewnienie bezpieczeństwa jazdy. Układ hamulcowy składa się z wielu komponentów, takich jak tarcze, klocki, bębny, szczęki, płyn hamulcowy i linie hamulcowe, które muszą być regularnie sprawdzane i konserwowane. Oto kluczowe etapy naprawy układu hamulcowego:\nDiagnostyka i Inspekcja: Pierwszym krokiem jest dokładna inspekcja układu hamulcowego, w tym ocena stanu tarcz hamulcowych, klocków, bębnów, szczęk oraz sprawdzenie poziomu i stanu płynu hamulcowego. Wykorzystuje się do tego zarówno wizualne oceny, jak i specjalistyczne narzędzia diagnostyczne.\nWymiana Zużytych Części: Najczęściej wymienianymi elementami są klocki i tarcze hamulcowe, które zużywają się w wyniku normalnej eksploatacji. Jeśli stwierdzona zostanie konieczność wymiany, uszkodzone części są zdejmowane, a na ich miejsce montowane są nowe komponenty.\nKontrola i Naprawa Układu Hydraulicznego: Płyn hamulcowy jest sprawdzany pod kątem obecności wody i zanieczyszczeń, które mogą obniżyć skuteczność hamowania. W razie potrzeby płyn jest wymieniany, a cały układ hydrauliczny jest odpowietrzany, aby usunąć z niego powietrze, co jest kluczowe dla prawidłowego działania hamulców.\nRegulacja Układu Hamulcowego: W przypadku układów hamulcowych bębnowych, może być konieczna ich regulacja, aby zapewnić równomierny kontakt pomiędzy szczękami a bębnem hamulcowym.\nTestowanie i Kalibracja: Po naprawie i wymianie części, układ hamulcowy jest dokładnie testowany, aby upewnić się, że hamulce działają prawidłowo i efektywnie. Testy mogą obejmować jazdę próbną, aby ocenić reakcję układu hamulcowego w różnych warunkach drogowych.\nRaport i Zalecenia dla Klienta: Na zakończenie klient otrzymuje szczegółowy raport z przeprowadzonych prac oraz zalecenia dotyczące dalszej eksploatacji i konserwacji układu hamulcowego.\nRegularna kontrola i konserwacja układu hamulcowego są niezbędne dla bezpieczeństwa wszystkich użytkowników drogi. Zużycie komponentów hamulcowych może różnić się w zależności od stylu jazdy, rodzaju pojazdu oraz warunków eksploatacji, dlatego ważne jest, aby śledzić stan układu hamulcowego i reagować na wszelkie oznaki jego zużycia czy awarii'
+    };
+    
+    document.getElementById('serviceDropdown').addEventListener('change', function() {
+        const selectedService = this.value;
+        const details = serviceDescriptions[selectedService] || 'Wybierz usługę, aby zobaczyć szczegóły.';
+        const image = serviceImages[selectedService] || 'services/blank.png';
+    
+        document.getElementById('serviceDetails').innerText = details;
+        document.getElementById('serviceImages').src = image;
+    });
+    
+</script>
+
+<div id="bcgrfont">
+    <p id="fontchange">Zmień wielkość czcionki</p>
+    <button id="changeFontPlus">+</button>
+    <button id="changeFontMin">-</button>
+</div>
+<script>
+   const changeFontSizeButtonPlus = document.getElementById('changeFontPlus');
+const changeFontSizeButtonMin = document.getElementById('changeFontMin');
+const serviceDetails = document.getElementById('serviceDetails');
+
+changeFontSizeButtonPlus.addEventListener('click', function() {
+    const currentSize = parseInt(window.getComputedStyle(serviceDetails).fontSize);
+    const newSize = currentSize + 2;
+    serviceDetails.style.fontSize = newSize + 'px';
+});
+
+changeFontSizeButtonMin.addEventListener('click', function() {
+    const currentSize = parseInt(window.getComputedStyle(serviceDetails).fontSize);
+    const newSize = currentSize - 2;
+    serviceDetails.style.fontSize = newSize + 'px';
+});
+</script>
+
+
+</body>
+</html>

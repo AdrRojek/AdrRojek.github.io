@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Warsztat Samochodowy</title>
   <link rel="stylesheet" href="style.css">
+  
 </head>
 
 <body>
@@ -65,34 +66,104 @@
 
     </section>
 
-<div class="box">
-	<a class="button" href="#popup1">Skontaktuj się z nami</a>
+    <section id="prices">
+        <h2>Cennik</h2>
+        <p id="showSmall">Kliknij na wybrane aby dowiedzieć się więcej</p>
+        <div class="price">Naprawa silników</div>
+        <div class="price">Wymiana kół + wyważenie</div>
+        <div class="price">Wymiana opon na nowe</div>
+        <div class="price">Diagnostyka komputerowa</div>
+        <div class="price">Remont skrzyni biegów</div>
+        <div class="price">Piaskowanie</div>
+    </section>
+    <script src="skrypt.js"></script>
+
+    <section id="contact">
+<div class="box" >
+	<a class="button" href="#popup1">Skontaktuj się z nami </a>
 </div>
 
 <div id="popup1" class="overlay">
 	<div class="popup">
-		<h2>Skontaktuj się z nami</h2>
+		<h2>Skontaktuj się z nami&#160;&#160;</h2>
 		<a class="close" href="#kontakt">×</a>
 		<div class="content">
-			<form action="">
-                <input type="text" placeholder="Imię" required> <br>
-                <input type="email" placeholder="Email"><br>
-                <input type="tel" id="tele" placeholder="Numer telefonu" size="9" minlength="9" maxlength="9" required><br>
+			<form action="#" id="myForm">
+                <input type="text" placeholder="Imię"  id="inputData"> <br>
+                <input type="email" placeholder="Email" id="inputEmail"><br>
+                <input type="tel" id="tele" placeholder="Numer telefonu" size="9" minlength="9" maxlength="9" ><br>
                 <div>
-                    <input type="radio" name="miano" id="os" value="osprywatna" checked><label for="os">Osoba Prywatna</label>
+                    <label for="osprywatna">Osoba Prywatna</label>
+                    <input type="radio" name="miano" id="osprywatna" value="osprywatna" checked>
                 </div>
                 <div>
-                    <input type="radio" name="miano" id="os" value="firma"><label for="os">Firma</label>
+                    <label for="firma">Firma</label>
+                    <input type="radio" name="miano" id="firma" value="firma">
                 </div>
                 <input type="text" name="pojazd" id="pojazd" placeholder="Marka i Model pojazdu">
-                <textarea placeholder="Wiadomość" ></textarea><br>
-                <button type="submit" >Wyślij</button>
+                <textarea placeholder="Wiadomość" id="wiadomosc"></textarea><br>
+                <button type="submit">Wyślij</button>
             </form>
 		</div>
 	</div>
 </div>
+</section>
 
-    
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = {
+            imie: document.getElementById('inputData').value,
+            email: document.getElementById('inputEmail').value,
+            telefon: document.getElementById('tele').value,
+            miano: document.querySelector('input[name="miano"]:checked').value,
+            pojazd: document.getElementById('pojazd').value,
+            wiadomosc: document.getElementById('wiadomosc').value
+        };
+
+        const validationMessages = validateFormData(formData);
+
+        if (Object.keys(validationMessages).length === 0) {
+            document.getElementById('popup1').style.display = 'none';
+            window.alert('Sukces! Formularz został pomyślnie wysłany.');
+            console.log('Dane z formularza:', formData);
+        } else {
+            const errorMessage = generateErrorMessage(validationMessages);
+            window.alert('Błąd: ' + errorMessage);
+        }
+    });
+
+    function validateFormData(formData) {
+        const messages = {};
+
+        if (formData.imie.length < 3) {
+            messages.imie = 'Imię jest za krótkie. Wprowadź co najmniej 3 litery.';
+        }
+
+        if (!formData.email) {
+            messages.email = 'Email jest wymagany.';
+        }
+
+        if (!formData.telefon || !/^\d{9}$/.test(formData.telefon)) {
+            messages.telefon = 'Numer telefonu jest wymagany i musi składać się z 9 cyfr.';
+        }
+
+        if (formData.pojazd && !/^\w+\s\w+$/.test(formData.pojazd)||!formData.pojazd) {
+            messages.pojazd = 'Marka i model pojazdu muszą zawierać przynajmniej jedną spację.';
+        }
+        
+        if (!formData.wiadomosc) {
+            messages.wiadomosc = 'Wiadomość jest wymagana.';
+        }
+
+        return messages;
+    }
+
+    function generateErrorMessage(messages) {
+        return Object.values(messages).join(' '+'\n');
+    }
+</script>
 
     </div>
     <footer>
@@ -100,18 +171,17 @@
         <a href="https://twitter.com/" id="icons"><img src="icons/x.png" alt="X"></a>
         <a href="https://www.facebook.com/"><img src="icons/Facebook.png" alt="FB"></a>
         <a href="https://www.instagram.com/"><img src="icons/Instagram.png" alt="IG"></a>
+       
+        <div id="visitCounter">Liczba odwiedzin: 0</div>
+
+        <script>
+            let visitCount = parseInt(localStorage.getItem('visitCount')) || 0;    
+            visitCount++;
+            localStorage.setItem('visitCount', visitCount.toString());
+            document.getElementById('visitCounter').innerText = `Liczba odwiedzin: ${visitCount}`;
+        </script>
     </footer>
 
-   
-    
-    <!--W dużym naczyniu wymieszaj razem płatki owsiane, mąkę, proszek do pieczenia, sodę oczyszczoną i sól. Odstaw na bok.
-    W drugim naczyniu ubij masło z brązowym i białym cukrem, aż masa będzie puszysta. Dodaj jajko i ekstrakt waniliowy, kontynuuj ubijanie.
-    Stopniowo dodawaj suchą mieszankę do mokrej, mieszając całość drewnianą łyżką lub mikserem na niskich obrotach, aż składniki się połączą.
-    Dodaj posiekaną czekoladę do ciasta i dokładnie wymieszaj, aby równomiernie rozprowadzić składniki.
-    Uformuj kulki ciasta o średnicy około 3 cm i ułóż je na blasze do pieczenia wyłożonej papierem do pieczenia, zachowując odstępy między nimi.
-    Piecz ciasteczka w nagrzanym piekarniku do 180 stopni Celsjusza przez około 10-12 minut, aż brzegi zaczną się rumienić.
-    Po upieczeniu wyjmij ciasteczka z piekarnika i pozostaw je na blasze przez kilka minut, a następnie przenieś je na kratkę do całkowitego ostygnięcia</p>
-    -->
 
 </body>
 

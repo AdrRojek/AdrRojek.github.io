@@ -18,6 +18,12 @@
                 width: 832px;
             }
         }
+        #showSmall{
+            display:none;
+        }
+        @media (max-width:450px) {
+            #showSmall{display: block;}
+        }
 
         * {
             box-sizing: border-box;
@@ -38,12 +44,17 @@
             text-align: center;
             padding: 10px 0
         }
+        
+        @media screen and (max-width:435px){
+            #main{background-size: auto auto;}
+        }
+        
 
         #main {
             padding: 20px;
             align-items: center;
             text-align: center;
-            background-image: url(warsztat2.png);
+            background-image: url(warsztat.png);
             box-sizing: border-box;
             min-height: 100vh;
             min-width: 23px;
@@ -84,14 +95,27 @@
 
         #services,
         #opinie,
-        #contact {
+        #contact,
+        #prices {
             padding: 20px;
             text-align: center;
 
         }
-        
+        #prices{
+            user-select: none;
+        }
+        .price:hover::before{
+            content: " Kliknij mnie ";
+            background-color: blue;
+            color: white;
+        }
+        .price:hover::after{
+            background-color:blue;
+            content: " Kliknij mnie ";
+            color: white;
+        }
 
-        .service {
+        .service,.price {
             margin: 10px 0
         }
 
@@ -106,7 +130,7 @@
             position: relative;
             height: 300px;
             width: 320px;
-            margin: 5px auto 120px auto;
+            margin: 40px auto 120px auto;
             perspective: 200%;
 
         }
@@ -265,7 +289,7 @@
                 height: 100%;
             }
         }
-
+        
         .box {
             width: auto;
             margin: 0 auto;
@@ -317,6 +341,7 @@
             width: 350px;
             position: relative;
             transition: all 1s ease-in-out;
+            
           }
           
           .popup h2 {
@@ -332,7 +357,7 @@
             font-size: 30px;
             font-weight: bold;
             text-decoration: none;
-            color: #333;
+            color: #ff0000;
           }
           .popup .close:hover {
             color: #d80606;
@@ -341,41 +366,6 @@
             max-height: 30%;
             overflow: auto;
           }
-          #os{width:50px;}
+          #osprywatna,#firma{width:50px;}
 
-        #textinpic{
-            position:absolute;
-            padding-left: 52%;
-            padding-bottom: 42%;
-            font-size: 50px;
-            transform: translate(-50%,-50%);
-            color: white;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-        }
-        #textinpic1{
-            position:absolute;
-            padding-right: 52%;
-            padding-bottom: 42%;
-            font-size: 50px;
-            transform: translate(-50%,-50%);
-            color: white;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-        }
-        #textinpic2{
-            position:absolute;
-            padding-left: 52%;
-            padding-bottom: 42%;
-            font-size: 50px;
-            transform: translate(-50%,-50%);
-            color: white;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-        }
-        #textinpic3{
-            position:absolute;
-            padding-left: 52%;
-            padding-bottom: 42%;
-            font-size: 50px;
-            transform: translate(-50%,-50%);
-            color: white;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-        }
+       

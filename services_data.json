@@ -1,0 +1,36 @@
+{
+    "services": [
+        {
+            "name": "Naprawa silników",
+            "duration": "Zależne od wady",
+            "cost": "Zależne od wady (100-5000zł)"
+        },
+        {
+            "name": "Wymiana kół + wyważenie",
+            "duration": "40 minut",
+            "cost": "100 zł"
+        },
+        {
+            "name": "Wymiana opon na nowe",
+            "duration": "90 minut",
+            "cost": "Cena opon + 100zł"
+        }, 
+        {
+            "name": "Diagnostyka komputerowa",
+            "duration": "1 godzina",
+            "cost": "150 zł"
+        },
+        {
+            "name": "Remont skrzyni biegów",
+            "duration": "1/2 doby",
+            "cost": "1500 zł"
+        },
+        {
+            "name": "Piaskowanie",
+            "duration": "4 godziny",
+            "cost": "2000 zł"
+            
+        }
+
+    ]
+}
